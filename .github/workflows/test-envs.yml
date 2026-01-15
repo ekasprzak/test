@@ -35,10 +35,10 @@ jobs:
         id: validate
         run: |
           ENV_INPUT="${{ github.event.inputs.envstring }}"
-          if jq -e --arg env "$ENV_INPUT" 'index($env)' environments.json > /dev/null; then
+          if jq -e --arg env "$ENV_INPUT" 'index($env)' envs.json > /dev/null; then
             echo "Environment is valid: $ENV_INPUT"
           else
-            echo "Error: Provided environment '$ENV_INPUT' is not valid. Allowed values are: $(jq -r '.[]' environments.json | paste -sd ',')"
+            echo "Error: Provided environment '$ENV_INPUT' is not valid. Allowed values are: $(jq -r '.[]' envs.json | paste -sd ',')"
             exit 1
           fi
         
