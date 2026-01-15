@@ -18,8 +18,30 @@ on:
         type: environment
         required: true
 
+      envstring:
+        description: 'env name as a string'
+        required: true 
+        type: string
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  validate-env:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+
+      - name: validate env input
+        id: validate
+        run: |
+          ENV_INPUT="${{ github.event.inputs.envstring }}"
+          if jq -e --arg env "$ENV_INPUT" 'index($env)' environments.json > /dev/null; then
+            echo "Environment is valid: $ENV_INPUT"
+          else
+            echo "Error: Provided environment '$ENV_INPUT' is not valid. Allowed values are: $(jq -r '.[]' environments.json | paste -sd ',')"
+            exit 1
+          fi
+        
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
