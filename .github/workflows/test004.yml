@@ -1,0 +1,14 @@
+name: Test 004
+on: 
+  workflow_dispatch:
+    inputs:
+      env:
+        description: 'choose env'
+        required: true
+        type: choice
+        options: [test, prod]
+jobs:
+  job1:
+    runs-on: ubuntu-slim
+    steps:
+      - run: echo "test 004!"
