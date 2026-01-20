@@ -11,4 +11,4 @@ jobs:
   job1:
     runs-on: ubuntu-slim
     steps:
-      - run: echo "test 004!"
+      - run: exit 1
