@@ -1,0 +1,14 @@
+name: Basic template
+on: 
+  workflow_dispatch:
+env:
+    SITE: ${{ vars.SITE && format('-{0}', vars.SITE) || '' }}
+jobs:
+  job1:
+    runs-on: ubuntu-slim
+    steps:
+      - run: |
+          echo "$SITE"
+          if [[ -z "$SITE" ]]; then
+            echo "SITE is empty"
+fi
