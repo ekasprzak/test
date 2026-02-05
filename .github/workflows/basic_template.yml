@@ -11,4 +11,4 @@ jobs:
           echo "$SITE"
           if [[ -z "$SITE" ]]; then
             echo "SITE is empty"
-fi
+          fi
