@@ -1,4 +1,5 @@
 name: Basic template
+description: descr of the wf
 on: 
   workflow_dispatch:
 env:
